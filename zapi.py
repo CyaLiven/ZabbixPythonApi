@@ -6,8 +6,14 @@
 # Date:   24, May, 2012
 ################################################
 
-import simplejson as json
-import urllib2, subprocess, re, time
+try:
+    import simplejson as json
+except ImportError:
+    import json
+import urllib2
+import subprocess
+import re
+import time
 
 class ZabbixAPIException(Exception):
     pass
@@ -25,8 +31,8 @@ class ZabbixAPI(object):
         self.__user = user
         self.__password = password
         self._zabbix_api_object_list = ('Action', 'Alert', 'APIInfo', 'Application', 'DCheck', 'DHost', 'DRule',
-                'DService', 'Event', 'Graph', 'Grahpitem', 'History', 'Host', 'Hostgroup', 'Image', 'Item', 
-                'Maintenance', 'Map', 'Mediatype', 'Proxy', 'Screen', 'Script', 'Template', 'Trigger', 'User',
+                'DService', 'Event', 'Graph', 'Grahpitem', 'History', 'Host', 'Hostgroup', 'Hostinterface', 'Image', 
+                'Item', 'Maintenance', 'Map', 'Mediatype', 'Proxy', 'Screen', 'Script', 'Template', 'Trigger', 'User',
                 'Usergroup', 'Usermacro', 'Usermedia')
     def __getattr__(self, name):
         if name not in self._zabbix_api_object_list:
